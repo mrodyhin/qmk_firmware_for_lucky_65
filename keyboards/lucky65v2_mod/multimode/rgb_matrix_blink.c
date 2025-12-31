@@ -5,6 +5,10 @@
 #include "rgb_matrix_blink.h"
 #include "timer.h"
 
+#ifndef NULL              /* pointer to nothing */
+#define NULL ((void *) 0)
+#endif
+
 #define NUM_BLINK_RGBS (sizeof(blink_rgbs) / sizeof(blink_rgbs[0]))
 
 // /* Example */
