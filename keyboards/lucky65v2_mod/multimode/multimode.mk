@@ -13,7 +13,7 @@ ifeq ($(strip $(MULTIMODE_ENABLE)), yes)
     IMMOBILE_ENABLE ?= yes
     OPT_DEFS += -DMULTIMODE_ENABLE
     OPT_DEFS += -DNO_USB_STARTUP_CHECK
-    QUANTUM_LIB_SRC += uart.c
+#     QUANTUM_LIB_SRC += uart.c // uart enabled using UART_DRIVER_REQUIRED = yes in config now
     COMMON_VPATH += $(MULTIMODE_DIR)/
     SRC += $(MULTIMODE_DIR)/multimode.c
     SRC += $(MULTIMODE_DIR)/retarget_suspend.c

@@ -296,10 +296,10 @@ __WEAK void lp_exti_init_kb(void) {
 #ifdef ENCODER_ENABLE
 #    include "encoder.h"
 #    ifndef ENCODERS_PAD_A_INT_DISABLE
-    static pin_t encoders_pad_a[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_A;
+    static pin_t encoders_pad_a[NUM_ENCODERS_MAX_PER_SIDE] = ENCODER_A_PINS;
 #    endif // !ENCODERS_PAD_A_INT_DISABLE
 #    ifndef ENCODERS_PAD_B_INT_DISABLE
-    static pin_t encoders_pad_b[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_B;
+    static pin_t encoders_pad_b[NUM_ENCODERS_MAX_PER_SIDE] = ENCODER_B_PINS;
 #    endif
 
     if (mm_get_sleep_level() == mm_sleep_level_timeout) {

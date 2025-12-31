@@ -1,7 +1,4 @@
-# MCU name
-
-# Bootloader selection
-
+UART_DRIVER_REQUIRED = yes
 # Firmware version
 SOFTWARE_VERSION = 5
 

@@ -18,7 +18,9 @@
         }
     },
     "encoder": {
-        "enabled": true
+        "enabled": true,
+        "pins_a": ["C8"],
+        "pins_b": ["C9"]
     },
     "mouse_key": {
         "enabled": false
@@ -34,6 +36,9 @@
         "speed_steps": 25,
         "val_steps": 20
     },
+    "ws2812": {
+        "driver": "spi"
+    },
     "rgblight": {
         "pin": "B15"
     },
@@ -42,6 +47,11 @@
         "pid": "0xE407",
         "suspend_wakeup_delay": 1000,
         "vid": "0x342D"
+    },
+    "host": {
+        "default": {
+            "nkro": true
+        }
     },
     "layouts": {
         "LAYOUT": {
@@ -60,8 +70,8 @@
                 {"label": "k0b", "matrix": [0, 11], "x": 11, "y": 0},
                 {"label": "k0c", "matrix": [0, 12], "x": 12, "y": 0},
                 {"label": "k0d", "matrix": [0, 13], "x": 13, "y": 0},
-                {"label": "k4c", "matrix": [0, 14], "x": 14, "y": 0},
-                {"label": "k4e", "matrix": [0, 15], "x": 15, "y": 0},
+                {"label": "k4c", "matrix": [4, 12], "x": 12, "y": 4},
+                {"label": "k4e", "matrix": [4, 14], "x": 14, "y": 4},
                 {"label": "k10", "matrix": [1, 0], "x": 0, "y": 1},
                 {"label": "k11", "matrix": [1, 1], "x": 1, "y": 1},
                 {"label": "k12", "matrix": [1, 2], "x": 2, "y": 1},
@@ -76,7 +86,7 @@
                 {"label": "k1b", "matrix": [1, 11], "x": 11, "y": 1},
                 {"label": "k1c", "matrix": [1, 12], "x": 12, "y": 1},
                 {"label": "k1d", "matrix": [1, 13], "x": 13, "y": 1},
-                {"label": "k4d", "matrix": [1, 14], "x": 14, "y": 1},
+                {"label": "k4d", "matrix": [4, 13], "x": 13, "y": 4},
                 {"label": "k20", "matrix": [2, 0], "x": 0, "y": 2},
                 {"label": "k21", "matrix": [2, 1], "x": 1, "y": 2},
                 {"label": "k22", "matrix": [2, 2], "x": 2, "y": 2},

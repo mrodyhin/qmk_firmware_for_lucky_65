@@ -1,3 +1,6 @@
+#define UART_DRIVER SD3 // Use SD3 for WB32 UART, avoids SD1 undefined error
+// Define number of encoders for encoder_map
+#define NUM_ENCODERS 1
 /* Copyright 2021 Glorious, LLC <salman@pcgamingrace.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +20,7 @@
 #pragma once
 
  /* USB */
-#define FORCE_NKRO
+
 
 /* Multimode */
 #ifdef MULTIMODE_ENABLE
@@ -88,8 +91,6 @@
 #define IM_MM_RGB_BLINK_INDEX_W2M 37
 #define IM_MM_RGB_BLINK_INDEX_W2H 37
 
-#define ENCODERS_PAD_A { C8 }
-#define ENCODERS_PAD_B { C9 }
 #define ENCODER_MAP_KEY_DELAY 1
 #define ENCODER_RESOLUTION 2
 
@@ -121,9 +122,16 @@
 #define WEAR_LEVELING_LOGICAL_SIZE (WEAR_LEVELING_BACKING_SIZE / 2)
 #define FEE_PAGE_COUNT (WEAR_LEVELING_BACKING_SIZE / FEE_PAGE_SIZE)
 
+
 /* RGB Matrix */
-#define WS2812_SPI SPIDM2
-#define WS2812_SPI_DIVISOR 24
+// #define WB32_SPI_USE_SPIM2 true
+// #define WS2812_SPI SPIDM2
+// QMK ARM SPI WS2812 driver config
+#define WS2812_SPI_DRIVER SPIDQ
+#define WS2812_SPI_SCK_PIN A5
+#define WS2812_SPI_MOSI_PIN A7
+#define WS2812_DI_PIN A7 // Required for ws2812_spi driver, must match MOSI
+// #define WS2812_SPI_DIVISOR 24
 
 #define RGB_MATRIX_LED_COUNT (67)
 #define RGB_MATRIX_STARTUP_MODE 13

@@ -131,7 +131,7 @@ void im_reset_settings(void) {
 #ifdef RGB_MATRIX_ENABLE
     eeconfig_update_rgb_matrix_default();
 #endif
-    keymap_config.raw = eeconfig_read_keymap();
+    eeconfig_read_keymap(&keymap_config);
 #if defined(NKRO_ENABLE) && defined(FORCE_NKRO)
     keymap_config.nkro = 1;
     eeconfig_update_keymap(keymap_config.raw);
@@ -465,7 +465,7 @@ static bool im_process_record_kb(uint16_t keycode, keyrecord_t *record) {
         } break;
 #endif
 #ifdef RGB_MATRIX_ENABLE
-        case RGB_TOG: {
+        case UG_TOGG: {
 #    ifdef RGBLIGHT_ENABLE
 #        ifdef RGB_TRIGGER_ON_KEYDOWN
             if (record->event.pressed) {
@@ -1937,9 +1937,12 @@ const char *usb_device_state_str[] = {
     "USB_DEVICE_STATE_SUSPEND",
 };
 
-void notify_usb_device_state_change_kb(enum usb_device_state usb_device_state) {
 
-    switch (usb_device_state) {
+// Use struct usb_device_state for state, matching QMK's usb_device_state.h
+void notify_usb_device_state_change_kb(struct usb_device_state usb_device_state) {
+
+
+    switch (usb_device_state.configure_state) {
         case USB_DEVICE_STATE_CONFIGURED: {
             switch (mm_get_sleep_status()) {
                 case mm_state_presleep:
@@ -1952,7 +1955,7 @@ void notify_usb_device_state_change_kb(enum usb_device_state usb_device_state) {
             }
         } break;
         case USB_DEVICE_STATE_INIT: {
-            keyboard_protocol = 1;
+            usb_device_state_set_protocol(USB_PROTOCOL_REPORT);
         } break;
         default:
             break;

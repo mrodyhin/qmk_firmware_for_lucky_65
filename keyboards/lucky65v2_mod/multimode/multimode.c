@@ -312,8 +312,8 @@ void mm_task(void) {
 
         // Set led indicators
         if (mm_eeconfig.devs != DEVS_USB) {
-            extern uint8_t keyboard_led_state;
-            keyboard_led_state = bts_info.bt_info.indicators;
+            // Update keyboard LED state (USB HID)
+            usb_device_state_set_leds(bts_info.bt_info.indicators);
         }
 
         if (!bt_init_time && (timer_elapsed32(last_time) >= (MM_BAT_REQ_TIME))) {
@@ -389,8 +389,8 @@ __WEAK bool mm_switch_mode(uint8_t last_mode, uint8_t now_mode, uint8_t reset) {
             #endif
             if (USB_DRIVER.state != USB_ACTIVE) {
                 extern void send_mouse(report_mouse_t * report);
-                extern uint8_t keyboard_led_state;
-                keyboard_led_state = 0x00;
+                // Update keyboard LED state (USB HID)
+                usb_device_state_set_leds(0x00);
                 chibios_driver.send_mouse = send_mouse;
                 init_usb_driver(&USB_DRIVER);
                 host_set_driver(&chibios_driver);
@@ -1344,7 +1344,7 @@ void register_code(uint8_t code) {
             // Force a new key press if the key is already pressed
             // without this, keys with the same keycode, but different
             // modifiers will be reported incorrectly, see issue #1708
-            if (is_key_pressed(keyboard_report, code)) {
+            if (is_key_pressed(code)) {
                 del_key(code);
                 send_keyboard_report();
             }
