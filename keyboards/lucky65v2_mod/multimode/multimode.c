@@ -1032,7 +1032,8 @@ static void mm_sleep_task(void) {
 
             // USB模式下的特殊处理 // Special handling for USB mode
             if ((mm_eeconfig.devs == DEVS_USB) && (!mm_eeconfig.charging)) {
-                // 关闭 USB DP EN, 停止USB // Disable USB DP EN, stop USB
+                // [DISABLED FOR DEBUG] Disable USB DP EN, stop USB
+                /*
                 if (USB_DRIVER.state != USB_STOP) {
                     #ifdef MM_USB_EN_PIN
                     writePin(MM_USB_EN_PIN, !MM_USB_EN_STATE);
@@ -1041,6 +1042,7 @@ static void mm_sleep_task(void) {
                     usbStop(&USB_DRIVER);
                     MM_DEBUG_INFO("[USB] usbDisconnectBus & Stop");
                 }
+                */
             }
 
             mm_set_sleep_state(mm_state_stop);
@@ -1088,11 +1090,13 @@ static void mm_sleep_task(void) {
             mm_sleep_user();
             mm_set_sleep_wakeupcd(mm_wakeup_none);
             if ((mm_eeconfig.devs == entry_devs)) {
-                // USB模式下的特殊处理 // Special handling for USB mode
+                // [DISABLED FOR DEBUG] Special handling for USB mode
+                /*
                 if ((mm_eeconfig.devs != DEVS_USB) || (!mm_eeconfig.charging)) {
                     MM_DEBUG_INFO("stop start");
                     lp_system_sleep(mm_get_sleep_level());
                 }
+                */
             }
 
             MM_DEBUG_INFO("stop end");
